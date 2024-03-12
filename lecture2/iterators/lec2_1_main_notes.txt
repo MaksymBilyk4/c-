@@ -1,0 +1,4 @@
+set contains data without duplicates in sorted order
+ranges::unique - returns duplicates of given container
+to remove elements from container we can use .erase(ptrStart, ptrEnd) - provide a start and end
+[x, y)

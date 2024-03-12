@@ -1,0 +1,14 @@
+vec.end() !!! ---> will pointing to next element in memory that goes after last element of other collection
+MEMORY represent:
+                         |3 |5 |2 |4 |2 |other data
+vec.end() pointer here ------->        ^ (next data in memory)
+
+         reset pointer
+         iterator = vec.begin();
+         * - current pointer address
+         ++ - go to next address
+         -- - return back to previous address
+         begin() - sets pointer to first element
+         end() - sets pointer to last element
+         front() - value of FIRST element
+         back() - value of LAST element
