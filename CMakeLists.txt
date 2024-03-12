@@ -14,6 +14,8 @@ FetchContent_MakeAvailable(fmt)
 
 add_executable(Main lecture2/iterators/fast.cpp)
 add_executable(WordReverse core/reversing_words.cpp)
+add_executable(FmtPrinting core/fmt_printing.cpp)
 
 target_link_libraries(Main fmt)
 target_link_libraries(WordReverse fmt)
+target_link_libraries(FmtPrinting fmt)
