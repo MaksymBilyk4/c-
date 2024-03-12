@@ -12,5 +12,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmt)
 
 
-add_executable(Main lecture2/iterators/iter2.cpp)
+add_executable(Main lecture2/iterators/fast.cpp)
+add_executable(WordReverse core/reversing_words.cpp)
+
 target_link_libraries(Main fmt)
+target_link_libraries(WordReverse fmt)

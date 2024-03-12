@@ -2,3 +2,10 @@ set contains data without duplicates in sorted order
 ranges::unique - returns duplicates of given container
 to remove elements from container we can use .erase(ptrStart, ptrEnd) - provide a start and end
 [x, y)
+
+
+we can overload function with not changing return type, but just change function's parameters/arguments and then we can change return type
+
+The list of parameters with default arguments must be at the end of the list of all parameters. You cannot add a parameter without a default value after a default argument.
+Default arguments are specified after the = sign.
+Default arguments are specified only in the function declaration. If we are simultaneously creating a declaration and definition (i.e., we have not created just a declaration without a body earlier), we can also specify them. However, if we have specified them in the declaration and have a separate declaration and definition, we do not repeat them in the definition.
