@@ -44,6 +44,7 @@ auto wordReverse(std::string str) -> std::string {
             isSpace = false;
         }
 
+        // przesuwam
         endPtr++;
     }
 
