@@ -6,14 +6,19 @@
 
 auto wordReverse(std::string str) -> std::string;
 
+auto wordReverseOptimized(std::string &str) -> void;
+
 auto main() -> int {
 
-    auto str = std::string();
-    std::cout << "Input some string: ";
-    std::getline(std::cin, str);
+    auto str = std::string("hel  world");
+//    std::cout << "Input some string: ";
+//    std::getline(std::cin, str);
 
-    auto reversed = wordReverse(str);
-    std::cout << "Reversed string ---> " << reversed;
+//    auto reversed = wordReverse(str);
+//    std::cout << "Reversed string ---> " << reversed;
+
+    wordReverseOptimized(str);
+
 
     return 0;
 }
@@ -55,4 +60,58 @@ auto wordReverse(std::string str) -> std::string {
         res += el;
 
     return res;
+}
+
+auto wordReverseOptimized(std::string &str) -> void {
+
+    using namespace std;
+
+    auto temp1 = string();
+    auto temp2 = string();
+
+    auto iterStart = true;
+    auto iterEnd = true;
+
+    auto i = 0;
+    auto k = 0;
+
+
+    auto j = str.size() - 1;
+    auto x = str.size() - 1;
+
+    cout << str << "\n";
+
+    while (true) {
+
+        if (iterStart && str[i] == ' ') {
+            iterStart = false;
+            temp1 = str.substr(k, i);
+        }
+
+        if (iterEnd && str[j] == ' ') {
+            iterEnd = false;
+            temp2 = str.substr(j, x);
+        }
+
+        if (iterStart) {
+            i++;
+        }
+
+        if (iterEnd) {
+            j--;
+        }
+
+        if (!iterStart && !iterEnd) {
+            str.replace(k, i, temp2);
+            str.replace(j + temp2.size() - temp1.size(), x - k, temp1);
+            break;
+//            k = i;
+//            x = j;
+
+        }
+
+    }
+
+    cout << str << "\n";
+
 }
