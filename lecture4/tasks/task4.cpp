@@ -62,10 +62,6 @@ auto replace(std::string &filePath, std::string &replaceStr) -> void {
     file = std::fstream(filePath, std::ios::out);
 
     for (auto &vec: wordMatrix) {
-        fmt::println("{}", fmt::join(vec, ""));
-    }
-
-    for (auto &vec: wordMatrix) {
         fmt::println(file, "{}", fmt::join(vec, ""));
     }
 }
