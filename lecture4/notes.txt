@@ -1,0 +1,10 @@
+Different options for opening a file for writing
+std::fstream optionally accepts a second argument in its constructor — file opening options. These are:
+
+std::ios::app — go to the end of the file on each write operation;
+std::ios::binary — open the file as binary;
+std::ios::in — open the file for reading only;
+std::ios::out — open the file for writing only;
+std::ios::trunc — clear the file after opening;
+std::ios::ate — go to the end of the file after opening (once).
+Options can be combined using the bitwise OR (|) operator.
