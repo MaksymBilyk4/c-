@@ -3,13 +3,21 @@ project(C__)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(BUILD_SHARED_LIBS FALSE)
+
 include(FetchContent)
 FetchContent_Declare(
         fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt
         GIT_TAG 10.2.1
 )
+FetchContent_Declare(
+        SFML
+        GIT_REPOSITORY  https://github.com/SFML/SFML
+        GIT_TAG         2.6.1
+)
 FetchContent_MakeAvailable(fmt)
+FetchContent_MakeAvailable(SFML)
 
 
 add_executable(Main lecture2/iterators/fast.cpp)
@@ -35,6 +43,15 @@ add_executable(Six lecture4/task6/task6.cpp)
 add_executable(SChunk core/lec4/chunk.cpp)
 add_executable(ExtendA core/lec4/extend_algo.cpp)
 add_executable(Backup core/lec4/backup.cpp)
+add_executable(SFMLTest new/SFML/main.cpp)
+add_executable(Lecture3 new/lecture3/wykład/main.cpp)
+add_executable(Lecture5 new/lecture5/wykład/main.cpp)
+add_executable(Lec5Task1 new/lecture5/tasks/task1.cpp)
+add_executable(Anagrams core/lec5/anagrams.cpp)
+add_executable(Cycle core/lec5/hasCycle.cpp)
+add_executable(WordLengthGrouping core/lec5/word-legth.cpp)
+add_executable(StudentNumbers core/lec5/student-numbers.cpp)
+add_executable(TwoDPoints core/lec5/2d-points.cpp)
 
 target_link_libraries(Main fmt)
 target_link_libraries(WordReverse fmt)
@@ -59,3 +76,12 @@ target_link_libraries(Six fmt)
 target_link_libraries(SChunk fmt)
 target_link_libraries(ExtendA fmt)
 target_link_libraries(Backup fmt)
+target_link_libraries(SFMLTest sfml-graphics)
+target_link_libraries(Lecture3 fmt)
+target_link_libraries(Lecture5 fmt)
+target_link_libraries(Lec5Task1 fmt)
+target_link_libraries(Anagrams fmt)
+target_link_libraries(Cycle fmt)
+target_link_libraries(WordLengthGrouping fmt)
+target_link_libraries(StudentNumbers fmt)
+target_link_libraries(TwoDPoints fmt)

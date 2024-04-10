@@ -4,7 +4,11 @@
 
 namespace files {
 
+    namespace fs = std::filesystem;
+
     auto backup(std::string &fromPath, std::string &toPath) -> bool;
+
+    auto processBackup(fs::path &source, fs::path &target) -> void;
 
 }
 
@@ -13,17 +17,39 @@ auto main() -> int {
     auto source = std::string();
     auto destination = std::string();
 
-    source = "#";
-    destination ="#";
+    source = "/Users/maksymbilyk/Desktop/programming/PJAIT/C++/core/lec4/fromPath";
+    destination = "/Users/maksymbilyk/Desktop/programming/PJAIT/C++/core/lec4/toPath";
 
     auto backupResult = files::backup(source, destination);
 
-    fmt::println("Back result: {}", backupResult);
+    fmt::println("Backup result: {}", backupResult);
 
     return 0;
 }
 
 namespace files {
+
+    namespace fs = std::filesystem;
+
+    auto processBackup(fs::path &source, fs::path &target) -> void {
+        if (!fs::exists(target) && !fs::create_directories(target)) {
+            fmt::print("Can't create : {}\n", target.string());
+            return;
+        }
+
+        for (const auto &entry: fs::directory_iterator(source)) {
+
+            if (entry.is_directory()) {
+                auto sourcePath = entry.path();
+                auto targetPath = target / (entry.path().filename().string() + "_backup");
+                files::processBackup(sourcePath, targetPath);
+            } else if (entry.is_regular_file()) {
+                auto replacedExtension = entry.path().filename().stem().string() + "_backup" + entry.path().extension().string();
+                auto destination = target / replacedExtension;
+                fs::copy(entry.path(), destination);
+            }
+        }
+    }
 
     auto backup(std::string &fromPath, std::string &toPath) -> bool {
         namespace fs = std::filesystem;
@@ -38,21 +64,10 @@ namespace files {
             return false;
         }
 
-        for (auto &entry: fs::recursive_directory_iterator(fromPath)) {
+        auto source = fs::path(fromPath);
+        auto target = fs::path(toPath);
 
-
-            auto relative = fs::relative(entry.path(), fromPath);
-            auto targetPath = fs::path(toPath) / relative;
-
-            if (entry.is_regular_file()) {
-                fs::copy_file(entry.path(), fs::path(targetPath));
-            }
-
-            if (entry.is_directory()) {
-                fs::create_directory(targetPath);
-            }
-
-        }
+        files::processBackup(source, target);
 
         return true;
 
