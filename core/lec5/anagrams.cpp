@@ -6,7 +6,45 @@
 #include <map>
 #include <algorithm>
 
-auto largestAnagramGroupsFrom(std::string &text) -> std::vector<std::string> {
+auto largestAnagramGroupsFrom1(std::string &text) -> std::vector<std::set<std::string>> {
+
+    // iter init
+    auto start = text.begin();
+    auto end = text.end();
+
+    // words map
+    auto words = std::map<std::string, std::set<std::string>>();
+
+    // current countable word
+    auto currentWord = std::string();
+
+    auto maxFrequenciesSize = 0;
+
+    while (start != end) {
+        if (*start >= 'a' && *start <= 'z' || *start >= 'A' && *start <= 'Z') {
+            currentWord.push_back(*start);
+        } else {
+            auto cpy = currentWord;
+            std::ranges::sort(currentWord);
+            words[currentWord].insert(cpy);
+            if (words[currentWord].size() > maxFrequenciesSize) maxFrequenciesSize = words[currentWord].size();
+            currentWord.clear();
+        }
+
+        start++;
+    }
+
+    auto maxFrequenciesVec = std::vector<std::set<std::string>>();
+
+    for (auto &entry: words) {
+        if (entry.second.size() == maxFrequenciesSize)
+            maxFrequenciesVec.push_back(entry.second);
+    }
+
+    return maxFrequenciesVec;
+}
+
+auto largestAnagramGroupsFrom(std::string &text) -> std::vector<std::set<std::string>> {
 
     // iter init
     auto start = text.begin();
@@ -31,21 +69,18 @@ auto largestAnagramGroupsFrom(std::string &text) -> std::vector<std::string> {
         start++;
     }
 
-    auto max = std::ranges::max_element(
-            words.begin(),
-            words.end(),
-            {},
-            [](auto& entry) -> int {return entry.second.size();}
-    );
+    auto frequenciesVec = std::vector<std::set<std::string>>();
 
-    fmt::println("{}", words);
+    for (auto &entry: words) {
+        if (entry.second.size() > 1)
+            frequenciesVec.push_back(entry.second);
+    }
 
-    return {max->second.begin(), max->second.end()};
+    return frequenciesVec;
 }
 
-auto main() -> int {
-    fmt::println("{}", "yessir");
 
+auto main() -> int {
     auto megaText = std::string();
     megaText = "In life, we find ourselves perplexed\n"
                "By twists and turns, and what comes next\n"
@@ -70,8 +105,10 @@ auto main() -> int {
                "For completeness, let’s add few more,\n"
                "made-up, words: elov arce\n";
 
-    auto result = largestAnagramGroupsFrom(megaText);
-    fmt::println("{}", result);
+    auto anagrams = largestAnagramGroupsFrom(megaText);
+    for (auto &anagramsSet: anagrams)
+        fmt::println("{}", fmt::join(anagramsSet, ", "));
+
 
     return 0;
 }

@@ -13,8 +13,8 @@ FetchContent_Declare(
 )
 FetchContent_Declare(
         SFML
-        GIT_REPOSITORY  https://github.com/SFML/SFML
-        GIT_TAG         2.6.1
+        GIT_REPOSITORY https://github.com/SFML/SFML
+        GIT_TAG 2.6.1
 )
 FetchContent_MakeAvailable(fmt)
 FetchContent_MakeAvailable(SFML)
@@ -52,6 +52,18 @@ add_executable(Cycle core/lec5/hasCycle.cpp)
 add_executable(WordLengthGrouping core/lec5/word-legth.cpp)
 add_executable(StudentNumbers core/lec5/student-numbers.cpp)
 add_executable(TwoDPoints core/lec5/2d-points.cpp)
+add_executable(Lecture6
+        lecture6/headers/main.cpp
+        lecture6/headers/utils/printer/printer.cpp
+        lecture6/headers/utils/math/maths.cpp
+        lecture6/headers/entity/point/point.cpp
+)
+
+add_executable(Lecture6_Templ lecture6/templates/main.cpp)
+add_executable(Lecture6_Templ_2 lecture6/templates/main2.cpp)
+add_executable(SFMP_TASK1 sfml_tasks/task1.cpp)
+add_executable(SFML_TEST sfml_tasks/test/main.cpp sfml_tasks/test/Button/Button.cpp
+        sfml_tasks/test/Point/Point.cpp)
 
 target_link_libraries(Main fmt)
 target_link_libraries(WordReverse fmt)
@@ -85,3 +97,8 @@ target_link_libraries(Cycle fmt)
 target_link_libraries(WordLengthGrouping fmt)
 target_link_libraries(StudentNumbers fmt)
 target_link_libraries(TwoDPoints fmt)
+target_link_libraries(Lecture6 fmt)
+target_link_libraries(Lecture6_Templ fmt)
+target_link_libraries(Lecture6_Templ_2 fmt)
+target_link_libraries(SFMP_TASK1 fmt sfml-graphics)
+target_link_libraries(SFML_TEST fmt sfml-graphics)
