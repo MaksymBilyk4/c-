@@ -58,14 +58,18 @@ add_executable(Lecture6
         lecture6/headers/utils/math/maths.cpp
         lecture6/headers/entity/point/point.cpp
 )
+#add_executable(TemplTest lecture6/templates/test.cpp)
 
 add_executable(Lecture6_Templ lecture6/templates/main.cpp)
 add_executable(Lecture6_Templ_2 lecture6/templates/main2.cpp)
 add_executable(SFMP_TASK1 sfml_tasks/task1.cpp)
 add_executable(SFML_TEST sfml_tasks/test/main.cpp sfml_tasks/test/Button/Button.cpp
         sfml_tasks/test/Point/Point.cpp)
+add_executable(Lecture77 lecture7/task1.cpp)
+add_executable(Core77 lecture7/core_.cpp)
 
 target_link_libraries(Main fmt)
+#target_link_libraries(TemplTest fmt)
 target_link_libraries(WordReverse fmt)
 target_link_libraries(FmtPrinting fmt)
 target_link_libraries(Cw2 fmt)
@@ -102,3 +106,5 @@ target_link_libraries(Lecture6_Templ fmt)
 target_link_libraries(Lecture6_Templ_2 fmt)
 target_link_libraries(SFMP_TASK1 fmt sfml-graphics)
 target_link_libraries(SFML_TEST fmt sfml-graphics)
+target_link_libraries(Lecture77 fmt)
+target_link_libraries(Core77 fmt)
